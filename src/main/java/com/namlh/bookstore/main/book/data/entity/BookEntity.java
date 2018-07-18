@@ -27,6 +27,9 @@ public class BookEntity {
     @Column(name = "quantity", nullable = false)
     private Integer quantity = 0;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private AuthorEntity author;

@@ -77,6 +77,7 @@ public class DbInitializeConfiguration {
                             "  title VARCHAR(255) NOT NULL, \n" +
                             "  price FLOAT default '0.0', \n" +
                             "  quantity INT default '0', \n" +
+                            "  image_url VARCHAR(255), \n" +
                             "  author_id INT, \n" +
                             "  publisher_id INT, \n" +
                             "  category_id INT, \n" +

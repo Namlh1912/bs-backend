@@ -44,6 +44,7 @@ public final class CreateBookImpl implements CreateBook {
         BookEntity bookEntity = new BookEntity();
         bookEntity.setTitle(request.getTitle());
         bookEntity.setPrice(request.getPrice());
+        bookEntity.setImageUrl(request.getImageUrl());
         bookEntity.setQuantity(request.getQuantity());
 
         AuthorEntity authorEntity = authorRepository.findOne(request.getAuthorId());
