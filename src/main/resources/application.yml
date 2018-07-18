@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: com.namlh.bookstore.main.config.datasource.SQLiteDialect
+        show-sql: true
+        ddl-auto: create-drop
+        naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+  datasource:
+    initialize: true

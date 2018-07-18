@@ -1,0 +1,96 @@
+package com.namlh.bookstore.main.config.datasource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+/**
+ * Created by app on 7/14/18.
+ */
+@Configuration
+public class DbInitializeConfiguration {
+
+    @Qualifier("dataSource")
+    @Autowired
+    private DataSource dataSource;
+
+    @PostConstruct
+    public void initialize(){
+        try {
+            Connection connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+
+            // user sql
+            statement.execute("DROP TABLE IF EXISTS tbl_user");
+            statement.executeUpdate(
+                    "CREATE TABLE tbl_user(\n" +
+                            "  id INTEGER PRIMARY KEY, \n" +
+                            "  username VARCHAR(255) UNIQUE NOT NULL, \n" +
+                            "  password VARCHAR(255) NOT NULL, \n" +
+                            "  first_name VARCHAR(100), \n" +
+                            "  last_name VARCHAR(100), \n" +
+                            "  email VARCHAR(255), \n" +
+                            "  mobile VARCHAR(30), \n" +
+                            "  started_date DATETIME)"
+            );
+
+            // author sql
+            statement.execute("DROP TABLE IF EXISTS tbl_author");
+            statement.executeUpdate(
+                    "CREATE TABLE tbl_author(\n" +
+                            "  id INTEGER PRIMARY KEY, \n" +
+                            "  name VARCHAR(255) UNIQUE NOT NULL, \n" +
+                            "  description TEXT, \n" +
+                            "  birth INTEGER, \n" +
+                            "  death INTEGER)"
+            );
+
+            // publisher sql
+            statement.execute("DROP TABLE IF EXISTS tbl_publisher");
+            statement.executeUpdate(
+                    "CREATE TABLE tbl_publisher(\n" +
+                            "  id INTEGER PRIMARY KEY, \n" +
+                            "  name VARCHAR(255) UNIQUE NOT NULL, \n" +
+                            "  description TEXT)"
+            );
+
+            // category sql
+            statement.execute("DROP TABLE IF EXISTS tbl_category");
+            statement.executeUpdate(
+                    "CREATE TABLE tbl_category(\n" +
+                            "  id INTEGER PRIMARY KEY, \n" +
+                            "  title VARCHAR(255) UNIQUE NOT NULL, \n" +
+                            "  description TEXT)"
+            );
+
+            // book sql
+            statement.execute("DROP TABLE IF EXISTS tbl_book");
+            statement.executeUpdate(
+                    "CREATE TABLE tbl_book(\n" +
+                            "  id INTEGER PRIMARY KEY, \n" +
+                            "  title VARCHAR(255) NOT NULL, \n" +
+                            "  price FLOAT default '0.0', \n" +
+                            "  quantity INT default '0', \n" +
+                            "  author_id INT, \n" +
+                            "  publisher_id INT, \n" +
+                            "  category_id INT, \n" +
+                            "  FOREIGN KEY (author_id) REFERENCES tbl_author(id),\n" +
+                            "  FOREIGN KEY (publisher_id) REFERENCES tbl_publisher(id),\n" +
+                            "  FOREIGN KEY (category_id) REFERENCES tbl_category(id)\n" +
+                            ");"
+            );
+
+            statement.close();
+            connection.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
