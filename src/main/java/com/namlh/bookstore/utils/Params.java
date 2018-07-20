@@ -13,4 +13,7 @@ public class Params {
 
     public static final String BOOK_PATH = "/book";
 
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+
+    public static final String ROLE_CUSTOMER = "ROLE_CUSTOMER";
 }

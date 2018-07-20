@@ -64,12 +64,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         super.unsuccessfulAuthentication(request, response, failed);
     }
 
-    public static String generateToken(Authentication authResult) {
-        String token = Jwts.builder()
+    static String generateToken(Authentication authResult) {
+        return Jwts.builder()
                 .setSubject(((User) authResult.getPrincipal()).getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SecurityConstants.SECRET.getBytes())
                 .compact();
-        return token;
     }
 }

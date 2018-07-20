@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static com.namlh.bookstore.utils.Params.ROLE_ADMIN;
+import static com.namlh.bookstore.utils.Params.ROLE_CUSTOMER;
+
 /**
  * Created by app on 7/14/18.
  */
@@ -37,12 +40,12 @@ public class DbInitializeConfiguration {
 
             statement.executeUpdate(
                     "INSERT INTO tbl_role(id, role_title, role_code) \n" +
-                            "VALUES (1, 'admin', 'ROLE_ADMIN')"
+                            "VALUES (1, 'admin', '"+ ROLE_ADMIN +"')"
             );
 
             statement.executeUpdate(
                     "INSERT INTO tbl_role(id, role_title, role_code) \n" +
-                            "VALUES (2, 'customer', 'ROLE_CUSTOMER')"
+                            "VALUES (2, 'customer', '"+ ROLE_CUSTOMER +"')"
             );
 
             // user sql
