@@ -1,5 +1,6 @@
 package com.namlh.bookstore.main.config.security;
 
+import com.namlh.bookstore.main.user.data.repository.BLTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -31,6 +33,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthFailureHandler authFailureHandler;
 
+    @Autowired
+    private SignOutSuccessHandler logoutSuccessHandler;
+
+    @Autowired
+    private BLTokenRepository blTokenRepository;
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -43,7 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager(), blTokenRepository))
                 .formLogin()
                 .permitAll()
                 .loginProcessingUrl(SIGN_IN_URL)
@@ -51,6 +59,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .successHandler(authSuccessHandler)
                 .failureHandler(authFailureHandler)
+                .and()
+                .logout()
+                .deleteCookies("JSESSIONID", "SESSION")
+                .permitAll()
+                .logoutRequestMatcher(
+                        new AntPathRequestMatcher(SecurityConstants.SIGN_OUT_URL, "GET"))
+                .logoutSuccessHandler(logoutSuccessHandler)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

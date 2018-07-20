@@ -23,6 +23,8 @@ public class UserMapper extends BaseMapper<UserEntity, UserModel> {
             model.setEmail(entity.getEmail());
             model.setMobile(entity.getMobile());
             model.setStartedDate(entity.getStartedDate());
+            model.setAddress(entity.getAddress());
+            model.setRoleTitle(entity.getRole().getRoleTitle());
         }
         return model;
     }

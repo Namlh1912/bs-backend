@@ -1,5 +1,7 @@
 package com.namlh.bookstore.main.config.security;
 
+import com.namlh.bookstore.main.user.data.entity.BLTokenEntity;
+import com.namlh.bookstore.main.user.data.repository.BLTokenRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,8 +21,12 @@ import java.util.ArrayList;
  */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
+    private BLTokenRepository blTokenRepository;
+
+    public JWTAuthorizationFilter(AuthenticationManager authenticationManager,
+                                  BLTokenRepository blTokenRepository) {
         super(authenticationManager);
+        this.blTokenRepository = blTokenRepository;
     }
 
     @Override
@@ -41,9 +47,14 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(SecurityConstants.HEADER_STRING);
         if (token != null) {
             try {
+                token = token.replace(SecurityConstants.TOKEN_PREFIX, "");
+                BLTokenEntity blTokenEntity = blTokenRepository.findByToken(token);
+                if (blTokenEntity != null) {
+                    return null;
+                }
                 String user = Jwts.parser()
                         .setSigningKey(SecurityConstants.SECRET.getBytes())
-                        .parseClaimsJws(token.replace(SecurityConstants.TOKEN_PREFIX, ""))
+                        .parseClaimsJws(token)
                         .getBody()
                         .getSubject();
                 if (user != null) {

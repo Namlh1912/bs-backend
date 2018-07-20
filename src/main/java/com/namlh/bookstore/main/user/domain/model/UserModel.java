@@ -26,5 +26,9 @@ public class UserModel {
 
     private String mobile;
 
+    private String address;
+
+    private String roleTitle;
+
     private Date startedDate;
 }

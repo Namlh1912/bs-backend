@@ -21,7 +21,11 @@ public class CreateUserRequest {
 
     private String lastName;
 
+    private String address;
+
     private String email;
 
     private String mobile;
+
+    private String roleCode;
 }

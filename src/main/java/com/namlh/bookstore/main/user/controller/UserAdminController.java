@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping(Params.USER_PATH)
-public class UserController {
-
-    @Autowired
-    private ListAllUser listAllUser;
+public class UserAdminController {
 
     @Autowired
     private ReadUserInfoById readUserInfoById;
@@ -28,11 +25,15 @@ public class UserController {
     @Autowired
     private CreateUser createUser;
 
+    @Autowired
+    private ListAllUser listAllUser;
+
     @RequestMapping(method = RequestMethod.GET)
     public Observable listAllUser() {
         return listAllUser.execute(new ListAllUserRequest());
     }
 
+    // user detail
     @RequestMapping(
             value = "/{userId}", method = RequestMethod.GET)
     public Observable readUserInfo(@PathVariable("userId") Integer userId) {

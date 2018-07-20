@@ -26,6 +26,25 @@ public class DbInitializeConfiguration {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
 
+            // role sql
+            statement.execute("DROP TABLE IF EXISTS tbl_role");
+            statement.executeUpdate(
+                    "CREATE TABLE tbl_role(\n" +
+                            "  id INTEGER PRIMARY KEY, \n" +
+                            "  role_title VARCHAR(255) NOT NULL, \n" +
+                            "  role_code VARCHAR(255) UNIQUE NOT NULL)"
+            );
+
+            statement.executeUpdate(
+                    "INSERT INTO tbl_role(id, role_title, role_code) \n" +
+                            "VALUES (1, 'admin', 'ROLE_ADMIN')"
+            );
+
+            statement.executeUpdate(
+                    "INSERT INTO tbl_role(id, role_title, role_code) \n" +
+                            "VALUES (2, 'customer', 'ROLE_CUSTOMER')"
+            );
+
             // user sql
             statement.execute("DROP TABLE IF EXISTS tbl_user");
             statement.executeUpdate(
@@ -35,9 +54,20 @@ public class DbInitializeConfiguration {
                             "  password VARCHAR(255) NOT NULL, \n" +
                             "  first_name VARCHAR(100), \n" +
                             "  last_name VARCHAR(100), \n" +
+                            "  address VARCHAR(255), \n" +
+                            "  role_id INT NOT NULL," +
                             "  email VARCHAR(255), \n" +
                             "  mobile VARCHAR(30), \n" +
-                            "  started_date DATETIME)"
+                            "  started_date DATETIME," +
+                            "  FOREIGN KEY (role_id) REFERENCES tbl_role(id))"
+            );
+
+            statement.execute("DROP TABLE IF EXISTS tbl_bltokens");
+            statement.executeUpdate(
+                    "CREATE TABLE tbl_bltokens(\n" +
+                            "  id INTEGER PRIMARY KEY, \n" +
+                            "  token TEXT UNIQUE NOT NULL, \n" +
+                            "  valid DATETIME NOT NULL)"
             );
 
             // author sql

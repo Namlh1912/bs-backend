@@ -43,8 +43,6 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
         UserEntity user = userRepository.findByUsername(userDetails.getUsername());
 
         LOGGER.info("{} got is connected", user.getUsername());
-        LOGGER.info("Login token: {}", response.getHeader("x-auth-token"));
-
         readUserInfoById.execute(new ReadUserInfoRequest(user.getId()))
             .subscribe(result -> {
                 response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX

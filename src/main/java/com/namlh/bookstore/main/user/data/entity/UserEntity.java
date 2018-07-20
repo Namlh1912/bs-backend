@@ -24,6 +24,7 @@ public class UserEntity {
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "first_name")
@@ -32,11 +33,18 @@ public class UserEntity {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "email")
     private String email;
 
     @Column(name = "mobile")
     private String mobile;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private RoleEntity role;
 
     @Column(name = "started_date")
     private Date startedDate;

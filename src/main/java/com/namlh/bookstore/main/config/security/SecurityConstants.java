@@ -12,4 +12,5 @@ public class SecurityConstants {
 
     public static final String SIGN_UP_URL = "/user/sign-up";
     public static final String SIGN_IN_URL = "/user/login";
+    public static final String SIGN_OUT_URL = "/user/logout";
 }
