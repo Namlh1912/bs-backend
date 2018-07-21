@@ -120,6 +120,33 @@ public class DbInitializeConfiguration {
                             ");"
             );
 
+            // order sql
+            statement.execute("DROP TABLE IF EXISTS tbl_order");
+            statement.executeUpdate(
+                    "CREATE TABLE tbl_order(\n" +
+                            "  id INTEGER PRIMARY KEY, \n" +
+                            "  order_code VARCHAR(255) UNIQUE NOT NULL, \n" +
+                            "  customer_id INT NOT NULL, \n" +
+                            "  order_date DATETIME,\n" +
+                            "  payment INT NOT NULL," +
+                            "  FOREIGN KEY (customer_id) REFERENCES tbl_user(id)" +
+                            ")"
+            );
+
+            // order detail sql
+            statement.execute("DROP TABLE IF EXISTS tbl_order_detail");
+            statement.executeUpdate(
+                    "CREATE TABLE tbl_order_detail(\n" +
+                            "  id INTEGER PRIMARY KEY, \n" +
+                            "  order_id INT NOT NULL, \n" +
+                            "  product_id INT NOT NULL, \n" +
+                            "  quantity INT NOT NULL default '1', " +
+                            "  total_price FLOAT DEFAULT '0.0', \n" +
+                            "  FOREIGN KEY (order_id) REFERENCES tbl_order(id), \n" +
+                            "  FOREIGN KEY (product_id) REFERENCES tbl_book(id)" +
+                            ")"
+            );
+
             statement.close();
             connection.close();
         }
