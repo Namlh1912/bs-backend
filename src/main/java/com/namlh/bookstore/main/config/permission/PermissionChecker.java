@@ -24,4 +24,9 @@ public class PermissionChecker {
         UserEntity userEntity = loggedInChecker.retrieveLoggedInUser();
         return userEntity != null && Params.ROLE_CUSTOMER.equals(userEntity.getRole().getRoleCode());
     }
+
+    public boolean checkCurrentUserCustomerAndId(Integer customerId) {
+        UserEntity userEntity = loggedInChecker.retrieveLoggedInUser();
+        return userEntity != null && customerId.equals(userEntity.getId()) && checkCurrentUserIsCustomer();
+    }
 }
