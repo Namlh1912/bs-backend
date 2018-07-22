@@ -14,6 +14,8 @@ import io.reactivex.Observable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * Created by app on 7/18/18.
  */
@@ -64,6 +66,7 @@ public final class CreateBookImpl implements CreateBook {
             throw new BookDoestNotExistException("Category does not exist");
         }
         bookEntity.setCategory(categoryEntity);
+        bookEntity.setCreated(new Date());
         bookRepository.save(bookEntity);
         return new CreateBookResponse(mapper.transform(bookEntity));
     }

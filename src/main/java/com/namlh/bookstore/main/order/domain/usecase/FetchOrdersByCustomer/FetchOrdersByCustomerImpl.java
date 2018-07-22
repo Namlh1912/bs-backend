@@ -38,7 +38,8 @@ public final class FetchOrdersByCustomerImpl implements FetchOrdersByCustomer {
         if (!Params.ROLE_CUSTOMER.equals(customer.getRole().getRoleCode())) {
             throw new MustBeCustomerException();
         }
-        List<OrderEntity> orders = orderRepository.findAllByCustomer_Username(customer.getUsername());
+        List<OrderEntity> orders = orderRepository
+                .findAllByCustomer_UsernameOrderByOrderDateDesc(customer.getUsername());
         return new FetchOrdersByCustomerResponse(orderMapper.transform(orders));
     }
 }

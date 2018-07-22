@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface OrderRepository extends JpaRepository<OrderEntity, Integer> {
 
-    List<OrderEntity> findAllByCustomer_Username(String username);
+    List<OrderEntity> findAllByCustomer_UsernameOrderByOrderDateDesc(String username);
 }

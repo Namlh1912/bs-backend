@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by app on 7/16/18.
@@ -41,4 +42,7 @@ public class BookEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "publisher_id", referencedColumnName = "id")
     private PublisherEntity publisher;
+
+    @Column(name = "created", nullable = false)
+    private Date created;
 }

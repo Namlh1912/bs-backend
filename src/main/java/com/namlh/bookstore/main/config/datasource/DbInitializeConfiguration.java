@@ -114,6 +114,7 @@ public class DbInitializeConfiguration {
                             "  author_id INT, \n" +
                             "  publisher_id INT, \n" +
                             "  category_id INT, \n" +
+                            "  created DATETIME, \n" +
                             "  FOREIGN KEY (author_id) REFERENCES tbl_author(id),\n" +
                             "  FOREIGN KEY (publisher_id) REFERENCES tbl_publisher(id),\n" +
                             "  FOREIGN KEY (category_id) REFERENCES tbl_category(id)\n" +
