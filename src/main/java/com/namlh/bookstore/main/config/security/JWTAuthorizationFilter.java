@@ -4,6 +4,7 @@ import com.namlh.bookstore.main.user.data.entity.BLTokenEntity;
 import com.namlh.bookstore.main.user.data.repository.BLTokenRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    private BLTokenRepository blTokenRepository;
+    private final BLTokenRepository blTokenRepository;
 
     public JWTAuthorizationFilter(AuthenticationManager authenticationManager,
                                   BLTokenRepository blTokenRepository) {
