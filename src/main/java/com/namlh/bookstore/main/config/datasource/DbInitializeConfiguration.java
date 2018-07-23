@@ -3,6 +3,7 @@ package com.namlh.bookstore.main.config.datasource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -22,6 +23,9 @@ public class DbInitializeConfiguration {
     @Qualifier("dataSource")
     @Autowired
     private DataSource dataSource;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostConstruct
     public void initialize(){
@@ -52,7 +56,7 @@ public class DbInitializeConfiguration {
             statement.execute("DROP TABLE IF EXISTS tbl_user");
             statement.executeUpdate(
                     "CREATE TABLE tbl_user(\n" +
-                            "  id INTEGER PRIMARY KEY, \n" +
+                            "  id INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
                             "  username VARCHAR(255) UNIQUE NOT NULL, \n" +
                             "  password VARCHAR(255) NOT NULL, \n" +
                             "  first_name VARCHAR(100), \n" +
@@ -64,7 +68,12 @@ public class DbInitializeConfiguration {
                             "  started_date DATETIME," +
                             "  FOREIGN KEY (role_id) REFERENCES tbl_role(id))"
             );
+            String adminPassEncrypted = bCryptPasswordEncoder.encode("12345678");
+            statement.executeUpdate(
+                    "INSERT INTO tbl_user(username, password, email, mobile, role_id) \n" +
+                    "VALUES ('admin', '" + adminPassEncrypted +"', 'abc@gmail.com', '124123232', 1)");
 
+            // token logout management
             statement.execute("DROP TABLE IF EXISTS tbl_bltokens");
             statement.executeUpdate(
                     "CREATE TABLE tbl_bltokens(\n" +
