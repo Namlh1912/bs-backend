@@ -10,6 +10,7 @@ import com.namlh.bookstore.utils.Params;
 import io.reactivex.Observable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -29,6 +30,7 @@ public class UserAdminController {
     private ListAllUser listAllUser;
 
     @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize("@permissionChecker.checkCurrentUserIsAdmin()")
     public Observable listAllUser() {
         return listAllUser.execute(new ListAllUserRequest());
     }
@@ -36,6 +38,7 @@ public class UserAdminController {
     // user detail
     @RequestMapping(
             value = "/{userId}", method = RequestMethod.GET)
+    @PreAuthorize("@permissionChecker.checkCurrentUserIsAdmin()")
     public Observable readUserInfo(@PathVariable("userId") Integer userId) {
         return readUserInfoById.execute(new ReadUserInfoRequest(userId));
     }
