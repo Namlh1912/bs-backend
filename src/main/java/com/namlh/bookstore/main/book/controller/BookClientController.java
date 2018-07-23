@@ -16,13 +16,13 @@ import static com.namlh.bookstore.utils.Params.DEFAULT_LIMIT;
  * Created by app on 7/23/18.
  */
 @RestController
-@RequestMapping(name = Params.CLIENT_PATH + Params.BOOK_PATH)
+@RequestMapping(Params.CLIENT_PATH + Params.BOOK_PATH)
 public class BookClientController {
 
     @Autowired
     private FetchListBook fetchListBook;
 
-    @RequestMapping(name = "/all",
+    @RequestMapping(name = "/list",
                     method = RequestMethod.GET)
     public Observable retrieveAllRecentBook(
             @RequestParam(name = "page") Integer page,

@@ -86,30 +86,59 @@ public class DbInitializeConfiguration {
             statement.execute("DROP TABLE IF EXISTS tbl_author");
             statement.executeUpdate(
                     "CREATE TABLE tbl_author(\n" +
-                            "  id INTEGER PRIMARY KEY, \n" +
+                            "  id INTEGER PRIMARY KEY AUTOINCREMENT , \n" +
                             "  name VARCHAR(255) UNIQUE NOT NULL, \n" +
-                            "  description TEXT, \n" +
-                            "  birth INTEGER, \n" +
-                            "  death INTEGER)"
+                            "  birth_year INTEGER )"
             );
+            statement.executeUpdate(
+                    "INSERT INTO tbl_author(name, birth_year) \n" +
+                            "VALUES ('Văn Thanh', 1918)");
+            statement.executeUpdate(
+                    "INSERT INTO tbl_author(name, birth_year) \n" +
+                            "VALUES ('Hồng Sơn', 1998)");
+            statement.executeUpdate(
+                    "INSERT INTO tbl_author(name, birth_year) \n" +
+                            "VALUES ('Văn Quyến', 1988)");
+            statement.executeUpdate(
+                    "INSERT INTO tbl_author(name, birth_year) \n" +
+                            "VALUES ('Mario Puzo', 1968)");
 
             // publisher sql
             statement.execute("DROP TABLE IF EXISTS tbl_publisher");
             statement.executeUpdate(
                     "CREATE TABLE tbl_publisher(\n" +
                             "  id INTEGER PRIMARY KEY, \n" +
-                            "  name VARCHAR(255) UNIQUE NOT NULL, \n" +
-                            "  description TEXT)"
+                            "  name VARCHAR(255) UNIQUE NOT NULL )"
             );
+            statement.executeUpdate(
+                    "INSERT INTO tbl_publisher(name) \n" +
+                            "VALUES ('NXBT')");
+            statement.executeUpdate(
+                    "INSERT INTO tbl_publisher(name) \n" +
+                            "VALUES ('Tien Phong')");
+            statement.executeUpdate(
+                    "INSERT INTO tbl_publisher(name) \n" +
+                            "VALUES ('Tuoi Tre')");
 
             // category sql
             statement.execute("DROP TABLE IF EXISTS tbl_category");
             statement.executeUpdate(
                     "CREATE TABLE tbl_category(\n" +
                             "  id INTEGER PRIMARY KEY, \n" +
-                            "  title VARCHAR(255) UNIQUE NOT NULL, \n" +
-                            "  description TEXT)"
+                            "  title VARCHAR(255) UNIQUE NOT NULL )"
             );
+            statement.executeUpdate(
+                    "INSERT INTO tbl_category(title) \n" +
+                            "VALUES ('Math')");
+            statement.executeUpdate(
+                    "INSERT INTO tbl_category(title) \n" +
+                            "VALUES ('Technology')");
+            statement.executeUpdate(
+                    "INSERT INTO tbl_category(title) \n" +
+                            "VALUES ('History')");
+            statement.executeUpdate(
+                    "INSERT INTO tbl_category(title) \n" +
+                            "VALUES ('Economy')");
 
             // book sql
             statement.execute("DROP TABLE IF EXISTS tbl_book");

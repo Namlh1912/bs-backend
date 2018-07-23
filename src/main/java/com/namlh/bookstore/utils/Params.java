@@ -5,9 +5,11 @@ package com.namlh.bookstore.utils;
  */
 public class Params {
 
-    public static final String ADMIN_PATH = "/admin";
+    public static final String ADMIN_PATH = "/api/admin";
 
-    public static final String CLIENT_PATH = "/client";
+    public static final String CLIENT_PATH = "/api/client";
+
+    public static final String LOGIN_PATH = "/api/login";
 
     public static final String USER_PATH = "/user";
 

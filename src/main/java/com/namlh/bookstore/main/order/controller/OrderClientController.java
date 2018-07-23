@@ -18,7 +18,7 @@ import static com.namlh.bookstore.utils.Params.DEFAULT_LIMIT;
  * Created by app on 7/22/18.
  */
 @RestController
-public class OrderController {
+public class OrderClientController {
 
     @Autowired
     private CreateOrder createOrder;
@@ -52,16 +52,5 @@ public class OrderController {
         return fetchOrdersByCustomer.execute(request);
     }
 
-    @RequestMapping(
-            value = Params.ADMIN_PATH + Params.ORDER_PATH,
-            method = RequestMethod.GET)
-    @PreAuthorize("@permissionChecker.checkCurrentUserIsAdmin()")
-    public Observable fetchOrdersByAdmin(
-            @RequestParam(name = "page") Integer page,
-            @RequestParam(name = "limit", required = false) Integer limit) {
-        FetchOrdersRequest request = new FetchOrdersRequest();
-        request.setPage(page == null ? 1: page);
-        request.setLimit(limit == null ? DEFAULT_LIMIT : limit);
-        return fetchOrders.execute(request);
-    }
+
 }

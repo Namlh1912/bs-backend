@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by app on 7/13/18.
  */
 @RestController
-@RequestMapping(Params.USER_PATH)
+@RequestMapping(Params.ADMIN_PATH + Params.USER_PATH)
 public class UserAdminController {
 
     @Autowired
@@ -29,7 +29,7 @@ public class UserAdminController {
     @Autowired
     private ListAllUser listAllUser;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/list",method = RequestMethod.GET)
     @PreAuthorize("@permissionChecker.checkCurrentUserIsAdmin()")
     public Observable listAllUser() {
         return listAllUser.execute(new ListAllUserRequest());
@@ -43,11 +43,11 @@ public class UserAdminController {
         return readUserInfoById.execute(new ReadUserInfoRequest(userId));
     }
 
-    @RequestMapping(
-            value = "/login", method = RequestMethod.POST)
-    public Observable login(@RequestBody CreateUserRequest request) {
-        return Observable.create(emitter -> emitter.onNext(HttpStatus.OK.value()));
-    }
+//    @RequestMapping(
+//            value = "/login", method = RequestMethod.POST)
+//    public Observable login(@RequestBody CreateUserRequest request) {
+//        return Observable.create(emitter -> emitter.onNext(HttpStatus.OK.value()));
+//    }
 
 //    @RequestMapping(
 //            value = "/sign-up", method = RequestMethod.POST)
