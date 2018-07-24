@@ -22,7 +22,7 @@ public class BookClientController {
     @Autowired
     private FetchListBook fetchListBook;
 
-    @RequestMapping(name = "/list",
+    @RequestMapping(value = "/list",
                     method = RequestMethod.GET)
     public Observable retrieveAllRecentBook(
             @RequestParam(name = "page") Integer page,
