@@ -1,9 +1,6 @@
 package com.namlh.bookstore.main.book.domain.usecase.EditBook;
 
-import com.namlh.bookstore.main.book.data.entity.AuthorEntity;
 import com.namlh.bookstore.main.book.data.entity.BookEntity;
-import com.namlh.bookstore.main.book.data.entity.CategoryEntity;
-import com.namlh.bookstore.main.book.data.entity.PublisherEntity;
 import com.namlh.bookstore.main.book.data.repository.AuthorRepository;
 import com.namlh.bookstore.main.book.data.repository.BookRepository;
 import com.namlh.bookstore.main.book.data.repository.CategoryRepository;
@@ -52,23 +49,9 @@ public final class EditBookImpl implements EditBook {
         bookEntity.setImageUrl(request.getImageUrl());
         bookEntity.setQuantity(request.getQuantity());
 
-        AuthorEntity authorEntity = authorRepository.findOne(request.getAuthorId());
-        if (authorEntity == null) {
-            throw new BookDoestNotExistException("Author does not exist");
-        }
-        bookEntity.setAuthor(authorEntity);
-
-        PublisherEntity publisherEntity = publisherRepository.findOne(request.getPublisherId());
-        if (publisherEntity == null) {
-            throw new BookDoestNotExistException("Publisher does not exist");
-        }
-        bookEntity.setPublisher(publisherEntity);
-
-        CategoryEntity categoryEntity = categoryRepository.findOne(request.getCategoryId());
-        if (categoryEntity == null) {
-            throw new BookDoestNotExistException("Category does not exist");
-        }
-        bookEntity.setCategory(categoryEntity);
+        bookEntity.setAuthor(request.getAuthor());
+        bookEntity.setPublisher(request.getPublisher());
+        bookEntity.setCategory(request.getCategory());
 
         bookRepository.save(bookEntity);
         return new EditBookResponse(bookMapper.transform(bookEntity));

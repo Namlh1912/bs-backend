@@ -15,7 +15,7 @@ public class CreateBookRequest {
     private int quantity;
     private String imageUrl;
 
-    private int authorId;
-    private int publisherId;
-    private int categoryId;
+    private String author;
+    private String publisher;
+    private String category;
 }

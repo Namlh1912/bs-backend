@@ -20,9 +20,9 @@ public class BookMapper extends BaseMapper<BookEntity, BookModel> {
             model.setImageUrl(entity.getImageUrl());
             model.setTitle(entity.getTitle());
             model.setPrice(entity.getPrice());
-            model.setAuthor(entity.getAuthor().getName());
-            model.setPublisher(entity.getPublisher().getName());
-            model.setType(entity.getCategory().getTitle());
+            model.setAuthor(entity.getAuthor());
+            model.setPublisher(entity.getPublisher());
+            model.setCategory(entity.getCategory());
         }
         return model;
     }

@@ -83,62 +83,62 @@ public class DbInitializeConfiguration {
             );
 
             // author sql
-            statement.execute("DROP TABLE IF EXISTS tbl_author");
-            statement.executeUpdate(
-                    "CREATE TABLE tbl_author(\n" +
-                            "  id INTEGER PRIMARY KEY AUTOINCREMENT , \n" +
-                            "  name VARCHAR(255) UNIQUE NOT NULL, \n" +
-                            "  birth_year INTEGER )"
-            );
-            statement.executeUpdate(
-                    "INSERT INTO tbl_author(name, birth_year) \n" +
-                            "VALUES ('Văn Thanh', 1918)");
-            statement.executeUpdate(
-                    "INSERT INTO tbl_author(name, birth_year) \n" +
-                            "VALUES ('Hồng Sơn', 1998)");
-            statement.executeUpdate(
-                    "INSERT INTO tbl_author(name, birth_year) \n" +
-                            "VALUES ('Văn Quyến', 1988)");
-            statement.executeUpdate(
-                    "INSERT INTO tbl_author(name, birth_year) \n" +
-                            "VALUES ('Mario Puzo', 1968)");
-
-            // publisher sql
-            statement.execute("DROP TABLE IF EXISTS tbl_publisher");
-            statement.executeUpdate(
-                    "CREATE TABLE tbl_publisher(\n" +
-                            "  id INTEGER PRIMARY KEY, \n" +
-                            "  name VARCHAR(255) UNIQUE NOT NULL )"
-            );
-            statement.executeUpdate(
-                    "INSERT INTO tbl_publisher(name) \n" +
-                            "VALUES ('NXBT')");
-            statement.executeUpdate(
-                    "INSERT INTO tbl_publisher(name) \n" +
-                            "VALUES ('Tien Phong')");
-            statement.executeUpdate(
-                    "INSERT INTO tbl_publisher(name) \n" +
-                            "VALUES ('Tuoi Tre')");
-
-            // category sql
-            statement.execute("DROP TABLE IF EXISTS tbl_category");
-            statement.executeUpdate(
-                    "CREATE TABLE tbl_category(\n" +
-                            "  id INTEGER PRIMARY KEY, \n" +
-                            "  title VARCHAR(255) UNIQUE NOT NULL )"
-            );
-            statement.executeUpdate(
-                    "INSERT INTO tbl_category(title) \n" +
-                            "VALUES ('Math')");
-            statement.executeUpdate(
-                    "INSERT INTO tbl_category(title) \n" +
-                            "VALUES ('Technology')");
-            statement.executeUpdate(
-                    "INSERT INTO tbl_category(title) \n" +
-                            "VALUES ('History')");
-            statement.executeUpdate(
-                    "INSERT INTO tbl_category(title) \n" +
-                            "VALUES ('Economy')");
+//            statement.execute("DROP TABLE IF EXISTS tbl_author");
+//            statement.executeUpdate(
+//                    "CREATE TABLE tbl_author(\n" +
+//                            "  id INTEGER PRIMARY KEY AUTOINCREMENT , \n" +
+//                            "  name VARCHAR(255) UNIQUE NOT NULL, \n" +
+//                            "  birth_year INTEGER )"
+//            );
+//            statement.executeUpdate(
+//                    "INSERT INTO tbl_author(name, birth_year) \n" +
+//                            "VALUES ('Văn Thanh', 1918)");
+//            statement.executeUpdate(
+//                    "INSERT INTO tbl_author(name, birth_year) \n" +
+//                            "VALUES ('Hồng Sơn', 1998)");
+//            statement.executeUpdate(
+//                    "INSERT INTO tbl_author(name, birth_year) \n" +
+//                            "VALUES ('Văn Quyến', 1988)");
+//            statement.executeUpdate(
+//                    "INSERT INTO tbl_author(name, birth_year) \n" +
+//                            "VALUES ('Mario Puzo', 1968)");
+//
+//            // publisher sql
+//            statement.execute("DROP TABLE IF EXISTS tbl_publisher");
+//            statement.executeUpdate(
+//                    "CREATE TABLE tbl_publisher(\n" +
+//                            "  id INTEGER PRIMARY KEY, \n" +
+//                            "  name VARCHAR(255) UNIQUE NOT NULL )"
+//            );
+//            statement.executeUpdate(
+//                    "INSERT INTO tbl_publisher(name) \n" +
+//                            "VALUES ('NXBT')");
+//            statement.executeUpdate(
+//                    "INSERT INTO tbl_publisher(name) \n" +
+//                            "VALUES ('Tien Phong')");
+//            statement.executeUpdate(
+//                    "INSERT INTO tbl_publisher(name) \n" +
+//                            "VALUES ('Tuoi Tre')");
+//
+//            // category sql
+//            statement.execute("DROP TABLE IF EXISTS tbl_category");
+//            statement.executeUpdate(
+//                    "CREATE TABLE tbl_category(\n" +
+//                            "  id INTEGER PRIMARY KEY, \n" +
+//                            "  title VARCHAR(255) UNIQUE NOT NULL )"
+//            );
+//            statement.executeUpdate(
+//                    "INSERT INTO tbl_category(title) \n" +
+//                            "VALUES ('Math')");
+//            statement.executeUpdate(
+//                    "INSERT INTO tbl_category(title) \n" +
+//                            "VALUES ('Technology')");
+//            statement.executeUpdate(
+//                    "INSERT INTO tbl_category(title) \n" +
+//                            "VALUES ('History')");
+//            statement.executeUpdate(
+//                    "INSERT INTO tbl_category(title) \n" +
+//                            "VALUES ('Economy')");
 
             // book sql
             statement.execute("DROP TABLE IF EXISTS tbl_book");
@@ -149,13 +149,10 @@ public class DbInitializeConfiguration {
                             "  price FLOAT default '0.0', \n" +
                             "  quantity INT default '0', \n" +
                             "  image_url VARCHAR(255), \n" +
-                            "  author_id INT, \n" +
-                            "  publisher_id INT, \n" +
-                            "  category_id INT, \n" +
-                            "  created DATETIME, \n" +
-                            "  FOREIGN KEY (author_id) REFERENCES tbl_author(id),\n" +
-                            "  FOREIGN KEY (publisher_id) REFERENCES tbl_publisher(id),\n" +
-                            "  FOREIGN KEY (category_id) REFERENCES tbl_category(id)\n" +
+                            "  author VARCHAR(255), \n" +
+                            "  publisher VARCHAR(255), \n" +
+                            "  category VARCHAR(255), \n" +
+                            "  created DATETIME \n" +
                             ");"
             );
 

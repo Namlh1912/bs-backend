@@ -13,8 +13,8 @@ public class BookModel {
     private int id;
     private String imageUrl;
     private String title;
-    private String type;
     private float price;
     private String publisher;
     private String author;
+    private String category;
 }
