@@ -1,6 +1,7 @@
 package com.namlh.bookstore.main.config.security;
 
 import com.namlh.bookstore.main.user.data.repository.BLTokenRepository;
+import com.namlh.bookstore.utils.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -55,6 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
 //                .antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL).permitAll()
+                .antMatchers(HttpMethod.GET, Params.CLIENT_PATH + Params.BOOK_PATH + "/list").permitAll()
                 .antMatchers(HttpMethod.POST, SecurityConstants.CUSTOMER_SIGN_UP_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()

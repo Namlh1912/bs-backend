@@ -15,9 +15,12 @@ import com.namlh.bookstore.main.book.domain.usecase.EditBook.EditBookRequest;
 import com.namlh.bookstore.main.book.domain.usecase.EditBook.EditBookResponse;
 import com.namlh.bookstore.main.book.domain.usecase.FetchListBook.FetchListBook;
 import com.namlh.bookstore.main.book.domain.usecase.FetchListBook.FetchListBookRequest;
+import com.namlh.bookstore.main.book.domain.usecase.ReadBookById.ReadBookById;
+import com.namlh.bookstore.main.book.domain.usecase.ReadBookById.ReadBookByIdRequest;
 import com.namlh.bookstore.utils.Params;
 import io.reactivex.Observable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import static com.namlh.bookstore.utils.Params.DEFAULT_LIMIT;
@@ -50,11 +53,16 @@ public class BookAdminController {
     @Autowired
     private EditBook editBook;
 
+    @Autowired
+    private ReadBookById readBookById;
+
+    //Create book
     @RequestMapping(method = RequestMethod.POST)
     public Observable createBook(@RequestBody CreateBookRequest request) {
         return createBook.execute(request);
     }
 
+    //List book
     @RequestMapping(value = "/list",
             method = RequestMethod.GET)
     public Observable retrieveAllRecentBook(
@@ -66,6 +74,7 @@ public class BookAdminController {
         return fetchListBook.execute(request);
     }
 
+    //Delete book
     @RequestMapping(value = "/{bookId}" ,method =  RequestMethod.DELETE)
     public Observable deleteBook(@PathVariable(name = "bookId") Integer bookId){
         DeleteBookRequest request = new DeleteBookRequest();
@@ -73,12 +82,21 @@ public class BookAdminController {
         return deleteBook.execute(request);
     }
 
+    //Edit book
     @RequestMapping(value="/{bookId}", method = RequestMethod.PUT)
     public Observable editBook(
             @RequestBody EditBookRequest request,
             @PathVariable(name = "bookId") Integer bookId){
         request.setBookId(bookId);
         return editBook.execute(request);
+    }
+
+    //Book detail
+    @RequestMapping(
+            value = "/{bookId}", method = RequestMethod.GET)
+    @PreAuthorize("@permissionChecker.checkCurrentUserIsAdmin()")
+    public Observable readBookInfo(@PathVariable("bookId") Integer bookId) {
+        return readBookById.execute(new ReadBookByIdRequest(bookId));
     }
 
     @RequestMapping(
