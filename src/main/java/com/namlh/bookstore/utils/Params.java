@@ -15,7 +15,7 @@ public class Params {
 
     public static final String BOOK_PATH = "/book";
 
-    public static final String ORDER_PATH = "/order";
+    public static final String ORDER_PATH = "/orders";
 
     public static final String ORDER_PREFIX = "BL";
 
