@@ -16,8 +16,7 @@ public class CreateOrderRequest {
     List<OrderDetailRequest> details = new ArrayList<>();
 
     @Data
-    @NoArgsConstructor
-    public class OrderDetailRequest {
+    public static class OrderDetailRequest {
 
         private Integer productId;
 

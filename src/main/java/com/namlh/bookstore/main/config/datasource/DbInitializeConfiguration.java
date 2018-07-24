@@ -164,10 +164,9 @@ public class DbInitializeConfiguration {
             statement.executeUpdate(
                     "CREATE TABLE tbl_order(\n" +
                             "  id INTEGER PRIMARY KEY, \n" +
-                            "  order_code VARCHAR(255) UNIQUE NOT NULL, \n" +
+                            "  order_code VARCHAR(255) UNIQUE, \n" +
                             "  customer_id INT NOT NULL, \n" +
                             "  order_date DATETIME,\n" +
-                            "  payment INT NOT NULL," +
                             "  FOREIGN KEY (customer_id) REFERENCES tbl_user(id)" +
                             ")"
             );

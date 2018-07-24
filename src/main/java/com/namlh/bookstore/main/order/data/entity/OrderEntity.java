@@ -22,7 +22,7 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "order_code", nullable = false, unique = true)
+    @Column(name = "order_code", unique = true)
     private String orderCode;
 
     @ManyToOne(fetch = FetchType.LAZY)

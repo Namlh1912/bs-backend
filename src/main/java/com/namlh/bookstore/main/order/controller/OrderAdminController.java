@@ -20,7 +20,6 @@ public class OrderAdminController {
     @Autowired
     private FetchOrders fetchOrders;
 
-
     @RequestMapping(
             value = Params.ADMIN_PATH + Params.ORDER_PATH,
             method = RequestMethod.GET)
