@@ -14,9 +14,7 @@ public class CreateAuthorRequest {
     @NonNull
     private String name;
 
-    private String description;
+    private int birthYear;
 
-    private int birth;
 
-    private int death;
 }

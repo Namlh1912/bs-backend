@@ -21,12 +21,7 @@ public class AuthorEntity {
     @Column(name = "name", unique = true)
     private String name;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "birth_year")
+    private Integer birthYear;
 
-    @Column(name = "birth")
-    private Integer birth;
-
-    @Column(name = "death")
-    private Integer death;
 }

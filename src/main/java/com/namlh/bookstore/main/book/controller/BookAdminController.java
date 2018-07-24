@@ -10,6 +10,9 @@ import com.namlh.bookstore.main.book.domain.usecase.CreatePublisher.CreatePublis
 import com.namlh.bookstore.main.book.domain.usecase.CreatePublisher.CreatePublisherRequest;
 import com.namlh.bookstore.main.book.domain.usecase.DeleteBook.DeleteBook;
 import com.namlh.bookstore.main.book.domain.usecase.DeleteBook.DeleteBookRequest;
+import com.namlh.bookstore.main.book.domain.usecase.EditBook.EditBook;
+import com.namlh.bookstore.main.book.domain.usecase.EditBook.EditBookRequest;
+import com.namlh.bookstore.main.book.domain.usecase.EditBook.EditBookResponse;
 import com.namlh.bookstore.main.book.domain.usecase.FetchListBook.FetchListBook;
 import com.namlh.bookstore.main.book.domain.usecase.FetchListBook.FetchListBookRequest;
 import com.namlh.bookstore.utils.Params;
@@ -44,6 +47,9 @@ public class BookAdminController {
     @Autowired
     private DeleteBook deleteBook;
 
+    @Autowired
+    private EditBook editBook;
+
     @RequestMapping(method = RequestMethod.POST)
     public Observable createBook(@RequestBody CreateBookRequest request) {
         return createBook.execute(request);
@@ -61,19 +67,19 @@ public class BookAdminController {
     }
 
     @RequestMapping(value = "/{bookId}" ,method =  RequestMethod.DELETE)
-    public Observable deleteBook( @PathVariable(name = "bookId") Integer bookId){
+    public Observable deleteBook(@PathVariable(name = "bookId") Integer bookId){
         DeleteBookRequest request = new DeleteBookRequest();
         request.setBookId(bookId);
         return deleteBook.execute(request);
     }
 
-
-//    @RequestMapping(
-//            value = "/all",
-//            method = RequestMethod.GET)
-//    public Observable fetchListBook() {
-//        return fetchListBook.execute(new FetchListBookRequest());
-//    }
+    @RequestMapping(value="/{bookId}", method = RequestMethod.PUT)
+    public Observable editBook(
+            @RequestBody EditBookRequest request,
+            @PathVariable(name = "bookId") Integer bookId){
+        request.setBookId(bookId);
+        return editBook.execute(request);
+    }
 
     @RequestMapping(
             value = "/author",

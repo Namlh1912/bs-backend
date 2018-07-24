@@ -14,5 +14,4 @@ public class CreateCategoryRequest {
     @NonNull
     private String title;
 
-    private String description;
 }

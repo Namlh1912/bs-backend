@@ -21,6 +21,4 @@ public class PublisherEntity {
     @Column(name = "name", unique = true)
     private String name;
 
-    @Column(name = "description")
-    private String description;
 }

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class BookModel {
 
     private int id;
+    private String imageUrl;
     private String title;
     private String type;
     private float price;

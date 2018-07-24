@@ -17,6 +17,7 @@ public class BookMapper extends BaseMapper<BookEntity, BookModel> {
         if (entity != null) {
             model = new BookModel();
             model.setId(entity.getId());
+            model.setImageUrl(entity.getImageUrl());
             model.setTitle(entity.getTitle());
             model.setPrice(entity.getPrice());
             model.setAuthor(entity.getAuthor().getName());

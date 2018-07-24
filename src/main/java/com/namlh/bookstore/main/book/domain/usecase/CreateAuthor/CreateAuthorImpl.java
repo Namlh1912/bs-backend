@@ -23,9 +23,7 @@ public final class CreateAuthorImpl implements CreateAuthor {
     private CreateAuthorResponse toResponse(CreateAuthorRequest request) {
         AuthorEntity entity = new AuthorEntity();
         entity.setName(request.getName());
-        entity.setDescription(request.getDescription());
-        entity.setBirth(request.getBirth());
-        entity.setDeath(request.getDeath());
+        entity.setBirthYear(request.getBirthYear());
         authorRepository.save(entity);
         return new CreateAuthorResponse(entity.getId());
     }

@@ -14,5 +14,4 @@ public class CreatePublisherRequest {
     @NonNull
     private String name;
 
-    private String description;
 }

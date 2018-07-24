@@ -23,7 +23,6 @@ public final class CreatePublisherImpl implements CreatePublisher {
     private CreatePublisherResponse toResponse(CreatePublisherRequest request) {
         PublisherEntity entity = new PublisherEntity();
         entity.setName(request.getName());
-        entity.setDescription(request.getDescription());
         publisherRepository.save(entity);
         return new CreatePublisherResponse(entity.getId());
     }

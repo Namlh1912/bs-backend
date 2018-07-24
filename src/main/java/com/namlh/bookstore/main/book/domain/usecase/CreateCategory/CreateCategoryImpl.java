@@ -23,7 +23,6 @@ public final class CreateCategoryImpl implements CreateCategory {
     private CreateCategoryResponse toResponse(CreateCategoryRequest request) {
         CategoryEntity entity = new CategoryEntity();
         entity.setTitle(request.getTitle());
-        entity.setDescription(request.getDescription());
         categoryRepository.save(entity);
         return new CreateCategoryResponse(entity.getId());
     }

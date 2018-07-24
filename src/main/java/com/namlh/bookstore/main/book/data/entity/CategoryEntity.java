@@ -21,8 +21,5 @@ public class CategoryEntity {
     @Column(name = "title", unique = true)
     private String title;
 
-    @Column(name = "description")
-    private String description;
-
 
 }
